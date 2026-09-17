@@ -1,50 +1,114 @@
-# ספר המתכונים של רחל - RachelRecipes (PWA)
+# RachelRecipes PWA 🍳
 
-ספר מתכונים דיגיטלי אישי ומשפחתי מבוסס PWA (Progressive Web App), מותאם לעבודה במטבח עם מסך מלא ללא כיבוי, חישוב כמויות חכם בעברית, ייבוא פוסטים מאינסטגרם, ועבודה מקומית ללא תלות באינטרנט (Local-First).
+A modern, mobile-first Progressive Web App (PWA) designed for kitchen use — built with React 19, TypeScript, Vite, Tailwind CSS v4, and shadcn/ui. Featuring full Hebrew RTL layout, BiDi isolation, smart ingredient scaling, Instagram Reel/post integration, hands-free cooking mode, and local-first persistence.
+
+Live Site: [https://amitly21.github.io/RachelRecipes/](https://amitly21.github.io/RachelRecipes/)
 
 ---
 
-## 🚀 הרצה מקומית (Quick Start)
+## ✨ Key Features
 
-ניתן להשתמש בקובץ ה-`Makefile` להפעלה מהירה:
+1. **Hebrew-First Mobile UI (RTL & BiDi Isolation)**
+   - Complete Right-to-Left (RTL) experience styled with Google's Rubik typography.
+   - Unicode bidirectional isolation (`\u2068...\u2069`) to prevent numbers, fractions, and units from flipping.
+
+2. **Smart Hebrew Ingredient Scaler**
+   - Interactive servings stepper & multipliers (0.5×, 1×, 1.5×, 2×, 3×).
+   - Natural language Hebrew fraction parsing (`חצי`, `רבע`, `שליש`, `1 וחצי`, `2 1/4`, `½`).
+   - First-match scope guarantees oven temperatures (e.g., "180 מעלות") and baking times are never accidentally scaled.
+   - Per-ingredient manual override capability.
+
+3. **Hands-Free Cooking Mode**
+   - High-contrast, distraction-free fullscreen kitchen view.
+   - **Screen Wake Lock API** prevents the display from sleeping during cooking.
+   - Interactive scratch-off checklists for ingredients and recipe steps.
+   - Built-in multi-preset kitchen timer with Web Audio synthesis sound alert and celebration confetti.
+
+4. **Instagram Split Import**
+   - Seamlessly embed Instagram Reels and posts side-by-side with the recipe editor.
+   - OpenGraph metadata extractor automatically pulls the real cover image and full caption.
+   - Smart Caption Parser detects recipe titles, prep/cook times, categories, ingredients, and instructions with a single click.
+
+5. **Local-First Resilient Data Layer**
+   - 100% offline-ready with zero latency.
+   - Abstract `RecipeDAO` backed primarily by IndexedDB with seamless LocalStorage fallback.
+   - Persistent Storage API integration (`navigator.storage.persist()`) protects recipes against automatic browser cache evictions.
+   - 1-Click JSON export and import for hassle-free device migration and backups.
+
+6. **Automated CI/CD & GitHub Pages**
+   - Automated GitHub Actions workflow on merge to `main`.
+   - Automatic semantic version tagging and GitHub Release creation.
+   - Instant deployment to GitHub Pages with relative asset bundling.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** React 19 + TypeScript
+- **Bundler & Tooling:** Vite 8, Node.js 22
+- **Styling:** Tailwind CSS v4, OKLCH color palettes, tw-animate-css
+- **UI Primitives:** shadcn/ui, Radix UI primitives, Lucide Icons, Sonner toasts
+- **Storage:** IndexedDB, Web Storage API, StorageManager API
+- **APIs:** Screen Wake Lock API, Web Audio API, Fullscreen API, Web Share API
+- **Testing & Quality:** Node.js native test runner, Oxlint
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 22+
+- npm 10+
+
+### Makefile Commands
+
+A self-documenting `Makefile` is included for common workflows:
 
 ```bash
-# הצגת כל הפקודות הזמינות
+# Display help and all available targets
 make help
 
-# הרצת שרת הפיתוח המקומי (פותח ב-http://127.0.0.1:5173)
+# Start local development server (http://127.0.0.1:5173)
 make dev
-# או:
-make run
+# or:
 make start
 
-# התקנת תלויות
+# Install project dependencies
 make install
 
-# הרצת בדיקות יחידה (מנוע המרת הכמויות בעברית)
+# Run automated unit tests
 make test
 
-# הידור חבילת ייצור
+# Run Oxlint code analysis
+make lint
+
+# Compile production bundle
 make build
 
-# תצוגה מקדימה של גרסת הייצור
+# Preview production build locally
 make preview
 
-# ניקוי קבצי הידור זמניים
+# Clean build artifacts
 make clean
 ```
 
-ניתן לשנות פורט או מארח באמצעות משתנים:
+You can customize port and host flags:
 ```bash
 make dev PORT=3000 HOST=0.0.0.0
 ```
 
 ---
 
-## ✨ מאפיינים מרכזיים
+## 📦 Deployment
 
-1. **עברית מובייל-פירסט (RTL & BiDi Isolation)**: ממשק עברי מלא עם גופן Rubik ובידוד כיווניות כך שמספרים, שברים ולוכסנים אינם מתהפכים.
-2. **מנוע המרת כמויות חכם**: סרגל מנות אינטראקטיבי המחשב מחדש כמויות לפי מספר סועדים, תומך בשברי מילים בעברית (`חצי`, `רבע`, `שליש`) ומשאיר טמפרטורות תנור ללא שינוי (First-Match Scope).
-3. **מצב בישול במטבח (Cooking Mode)**: מסך מלא עם ניגודיות גבוהה, Screen Wake Lock לשמירת מסך דולק, צ'ק-ליסט מצרכים ושלבים, וטיימר מטבח מובנה עם צליל התראה.
-4. **ייבוא מפוצל מאינסטגרם**: הצגת הפוסט/רילס לצד טופס העריכה עם מנתח טקסט אוטומטי (Smart Caption Parser) לחילוץ מצרכים ושלבים בלחיצה.
-5. **שכבת נתונים מקומית מופשטת (Abstract DAO)**: שמירה אוטומטית ב-IndexedDB וב-LocalStorage עם סמנטיקה התואמת ל-Firestore, כולל כלי גיבוי ושחזור 1-Click JSON.
+Every push to the `main` branch automatically triggers the [.github/workflows/deploy.yml](.github/workflows/deploy.yml) workflow which:
+1. Runs the test suite (`npm test`) and linter (`npm run lint`).
+2. Builds production assets (`npm run build`).
+3. Creates a semantic version tag and GitHub release.
+4. Deploys the static PWA to GitHub Pages.
+
+---
+
+## 📄 License
+
+MIT License. Designed with ❤️ for family cooking.
