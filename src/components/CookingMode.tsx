@@ -208,9 +208,9 @@ export const CookingMode: React.FC<CookingModeProps> = ({
   const stepsProgressPct = stepsCount > 0 ? (stepsDoneCount / stepsCount) * 100 : 0;
 
   return (
-    <div className="fixed inset-0 z-50 bg-stone-950 text-stone-100 flex flex-col overflow-hidden select-none">
+    <div className="fixed inset-0 z-50 bg-stone-950 text-stone-100 flex flex-col overflow-hidden select-none pb-[env(safe-area-inset-bottom,0px)]">
       {/* Top Kitchen Bar */}
-      <header className="px-3 sm:px-6 py-3 bg-stone-900/95 border-b border-stone-800 flex items-center justify-between backdrop-blur-md">
+      <header className="px-3 sm:px-6 py-3 pt-[calc(env(safe-area-inset-top,0px)+0.75rem)] bg-stone-900/95 border-b border-stone-800 flex items-center justify-between backdrop-blur-md">
         <div className="flex items-center gap-3 min-w-0">
           <Button
             variant="secondary"
@@ -542,7 +542,7 @@ export const CookingMode: React.FC<CookingModeProps> = ({
 
       {/* Floating Kitchen Timer Drawer */}
       {timerDrawerOpen && (
-        <div className="bg-stone-950 border-t border-stone-800 p-4 shadow-2xl transition-all">
+        <div className="bg-stone-950 border-t border-stone-800 p-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)] shadow-2xl transition-all">
           <div className="max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="size-12 rounded-2xl bg-orange-600 flex items-center justify-center text-white font-mono text-xl font-bold shadow-lg shadow-orange-600/30 shrink-0">

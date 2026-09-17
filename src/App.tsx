@@ -144,9 +144,16 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col font-sans text-foreground">
-      {/* Toast Notification Container with RTL */}
-      <Toaster richColors position="top-center" dir="rtl" />
+    <div className="min-h-screen bg-background flex flex-col font-sans text-foreground pb-[env(safe-area-inset-bottom,0px)]">
+      {/* Toast Notification Container with RTL & Safe Area Offset */}
+      <Toaster
+        richColors
+        position="top-center"
+        dir="rtl"
+        style={{
+          top: 'calc(env(safe-area-inset-top, 0px) + 12px)',
+        }}
+      />
 
       {/* Header */}
       <Header
@@ -383,7 +390,7 @@ export const App: React.FC = () => {
 
       {/* 3. Instagram Split Import Modal */}
       {isInstagramSplitOpen && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 pt-[calc(env(safe-area-inset-top,0px)+0.5rem)] pb-[calc(env(safe-area-inset-bottom,0px)+0.5rem)]">
           <div className="w-full max-w-5xl h-full max-h-[92vh]">
             <InstagramSplitImport
               initialUrl={instagramInitialUrl}
