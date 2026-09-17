@@ -1,0 +1,70 @@
+{
+  "name": "ספר המתכונים של רחל - RachelRecipes",
+  "short_name": "מתכוני רחל",
+  "description": "ספר מתכונים משפחתי אישי, חישוב כמויות חכם בעברית, ייבוא מאינסטגרם ומצב בישול במטבח",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fffbf5",
+  "theme_color": "#ea580c",
+  "orientation": "portrait-primary",
+  "dir": "rtl",
+  "lang": "he",
+  "icons": [
+    {
+      "src": "./icons/72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["food", "lifestyle", "utilities"]
+}
