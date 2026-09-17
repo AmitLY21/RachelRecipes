@@ -5,146 +5,16 @@ const DB_VERSION = 1;
 const STORE_NAME = 'recipes';
 const LOCALSTORAGE_BACKUP_KEY = 'rachel_recipes_data';
 
-// Initial Seed Recipes in authentic Hebrew
-export const SEED_RECIPES: Recipe[] = [
-  {
-    id: 'rec_choco_cake',
-    title: 'עוגת שוקולד קלאסית נימוחה',
-    sourceUrl: 'https://www.instagram.com/p/ExampleChocolateCake/',
-    isInstagramEmbed: true,
-    imageUrl: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80',
-    categories: ['קינוחים', 'אפייה', 'חלבי'],
-    baseServings: 8,
-    prepTimeMinutes: 20,
-    cookTimeMinutes: 40,
-    ingredients: [
-      '200g קמח לבן מנופה',
-      '1 1/2 כוסות סוכר, לאפות ב-180 מעלות',
-      'חצי כוס אבקת קקאו איכותית',
-      '1 כפית אבקת אפייה',
-      'חצי כפית סודה לשתייה',
-      'רבע כפית מלח',
-      '2 ביצים גדולות בטמפרטורת החדר',
-      '1 כוס חלב פושר',
-      'חצי כוס שמן קנולה',
-      '1 כוס קפה חם נמס'
-    ],
-    steps: [
-      'מחממים תנור ל-180 מעלות ומשמנים תבנית קפיצית בקוטר 24 ס״מ.',
-      'בקערה גדולה מנפים יחד את כל החומרים היבשים: קמח, קקאו, סוכר, אבקת אפייה, סודה לשתייה ומלח.',
-      'בקערה נפרדת טורפים ביצים, חלב ושמן עד לאיחוד.',
-      'מאחדים בין התערובות וטורפים קלות, מוסיפים את הקפה החם בהדרגה עד לבלילה אחידה ונוזלית מעט.',
-      'יוצקים לתבנית ואופים 35-40 דקות, עד שקיסם הננעץ במרכז יוצא עם פירורים לחים.',
-      'מצננים 15 דקות לפני חיתוך והגשה.'
-    ],
-    notes: 'עוגה נהדרת שמשתבחת למחרת. מומלץ להגיש עם גנאש שוקולד חם או אבקת סוכר.',
-    createdAt: '2026-09-10T10:00:00Z',
-    isFavorite: true,
-  },
-  {
-    id: 'rec_shabbat_challah',
-    title: 'חלת שבת עשירה וקלועה',
-    sourceUrl: 'https://www.instagram.com/reel/ExampleChallahReel/',
-    isInstagramEmbed: true,
-    imageUrl: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=800&q=80',
-    categories: ['מאפים ולחמים', 'פרווה', 'מסורתי'],
-    baseServings: 2,
-    prepTimeMinutes: 30,
-    cookTimeMinutes: 25,
-    ingredients: [
-      '1 ק״ג קמח לחם לבן מנופה',
-      '2 כפות שמרים יבשים',
-      'שליש כוס סוכר',
-      '1 1/2 כפיות מלח דק',
-      'חצי כוס שמן קנולה',
-      '2 1/4 כוסות מים פושרים',
-      '1 ביצה טרופה להברשה',
-      'שומשום או פרג לפיזור'
-    ],
-    steps: [
-      'בקערת מיקסר עם וו לישה שמים קמח, שמרים וסוכר ומערבבים קלות.',
-      'מתחילים ללוש במהירות נמוכה ומוסיפים בהדרגה את המים והשמן.',
-      'מוסיפים את המלח וממשיכים ללוש כ-10-12 דקות עד לקבלת בצק חלק, גמיש ונעים למגע.',
-      'משמנים קערה במעט שמן, מגלגלים את הבצק ומתפיחים מכוסה כשעה עד להכפלת הנפח.',
-      'מחלקים את הבצק לרצועות וקולעים שתי חלות יפהפיות.',
-      'מתפיחים שוב כ-30 דקות. מברישים בביצה ומפזרים שומשום בנדיבות.',
-      'אופים בתנור שחומם מראש ל-190 מעלות כ-25 דקות עד להזהבה עמוקה.'
-    ],
-    notes: 'לסיום מבריק: ישר אחרי היציאה מהתנור מומלץ לכסות במגבת מטבח נקייה ל-10 דקות כדי לשמור על רכות הקרום.',
-    createdAt: '2026-09-12T14:30:00Z',
-    isFavorite: true,
-  },
-  {
-    id: 'rec_home_shakshuka',
-    title: 'שקשוקה עגבניות פיקנטית של בית',
-    sourceUrl: 'https://www.instagram.com/p/ExampleShakshuka/',
-    isInstagramEmbed: false,
-    imageUrl: 'https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=800&q=80',
-    categories: ['עיקריות', 'מהיר להכנה', 'צמחוני'],
-    baseServings: 4,
-    prepTimeMinutes: 15,
-    cookTimeMinutes: 20,
-    ingredients: [
-      '4 כפות שמן זית מובחר',
-      '1 בצל גדול קצוץ דק',
-      '1 פלפל אדום חתוך לקוביות',
-      'חצי פלפל חריף ירוק קצוץ (לפי הטעם)',
-      '4 שיני שום כתושות',
-      '1 כף גדושה פפריקה מתוקה בשמן',
-      'חצי כפית כמון טחון',
-      '6 עגבניות בשלות קלופות וחתוכות לקוביות',
-      '2 כפות רסק עגבניות איכותי',
-      'חצי כפית סוכר (לאיזון חמיצות)',
-      '4 ביצים טריות',
-      'חופן כוסברה או פטרוזיליה קצוצה'
-    ],
-    steps: [
-      'במחבת רחבה ועמוקה מחממים שמן זית ומטגנים את הבצל עד להזהבה קלה.',
-      'מוסיפים את הפלפל האדום והפלפל החריף ומטגנים כ-5 דקות עד לריכוך.',
-      'מוסיפים שום כתוש, פפריקה וכמון ופותחים את התבלינים בשמן כדקה.',
-      'מוסיפים עגבניות, רסק עגבניות, מלח, פלפל וסוכר. מנמיכים להבה ומבשלים כ-15 דקות עד לקבלת רוטב סמיך ועשיר.',
-      'יוצרים שקעים ברוטב ושוברים פנימה את הביצים.',
-      'מכסים במכסה ומבשלים על אש נמוכה כ-5-8 דקות, עד שהחלבון מתייצב והחלמון נותר רך ונוזלי.',
-      'מפזרים פטרוזיליה טרייה ומגישים חם ישירות עם חלה טרייה.'
-    ],
-    notes: 'מעולה עם תוספת קוביות פטה או חציל קלוי מעל.',
-    createdAt: '2026-09-14T08:00:00Z',
-    isFavorite: false,
-  },
-  {
-    id: 'rec_herb_salmon',
-    title: 'פילה סלמון בעשבי תיבול ושום בתנור',
-    sourceUrl: 'https://www.instagram.com/p/ExampleSalmon/',
-    isInstagramEmbed: false,
-    imageUrl: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80',
-    categories: ['דגים', 'עיקריות', 'מהיר להכנה'],
-    baseServings: 4,
-    prepTimeMinutes: 10,
-    cookTimeMinutes: 15,
-    ingredients: [
-      '4 נתחי פילה סלמון טרי (כ-180g כל נתח)',
-      '3 כפות שמן זית כתית מעולה',
-      '3 שיני שום כתושות',
-      '1 כף חרדל דיז\'ון גרגירים',
-      '1 כף דבש או סילאן',
-      'חצי כפית מלח ים אטלנטי',
-      'רבע כפית פלפל שחור גרוס',
-      'חצי כוס עשבי תיבול קצוצים (שמיר, פטרוזיליה, בצל ירוק)',
-      '1 לימון פרוס לפלחים דקים'
-    ],
-    steps: [
-      'מחממים תנור ל-200 מעלות במצב טורבו ומרפדים תבנית בנייר אפייה.',
-      'מניחים את נתחי הסלמון על התבנית עם העור כלפי מטה ומייבשים בנייר סופג.',
-      'בקערית מערבבים שמן זית, שום, חרדל, דבש, מלח ופלפל.',
-      'מורחים את הרוטב בנדיבות על כל נתח ומפזרים מעל את עשבי התיבול הקצוצים.',
-      'מניחים פלחי לימון על הנתחים ומסביבם.',
-      'אופים בדיוק 12-14 דקות, עד שהדג עשוי אך נשאר עסיסי ורך מבפנים.'
-    ],
-    notes: 'זהירות מאפיית יתר! הסלמון במיטבו כשהוא ורוד ועסיסי במרכז.',
-    createdAt: '2026-09-15T16:00:00Z',
-    isFavorite: false,
-  }
-];
+// Hardcoded seed IDs to clean up from any previous installs
+export const HARDCODED_SEED_IDS = new Set<string>([
+  'rec_choco_cake',
+  'rec_shabbat_challah',
+  'rec_home_shakshuka',
+  'rec_herb_salmon',
+]);
+
+// Empty seed recipes by default
+export const SEED_RECIPES: Recipe[] = [];
 
 export interface RecipeDAO {
   getAll(): Promise<Recipe[]>;
@@ -206,8 +76,36 @@ class IndexedDBRecipeDAO implements RecipeDAO {
     }
   }
 
+  // Purge any previously stored hardcoded seed recipes
+  private async cleanupHardcodedSeeds(): Promise<void> {
+    const CLEANUP_KEY = 'rachel_hardcoded_seeds_purged_v1';
+    try {
+      if (typeof window === 'undefined') return;
+      if (localStorage.getItem(CLEANUP_KEY) === 'true') return;
+
+      // Clean LocalStorage backup
+      const local = this.getLocalBackup();
+      const cleanedLocal = local.filter((r) => !HARDCODED_SEED_IDS.has(r.id));
+      this.saveLocalBackup(cleanedLocal);
+
+      // Clean IndexedDB
+      const db = await this.getDB();
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      const store = tx.objectStore(STORE_NAME);
+      for (const id of HARDCODED_SEED_IDS) {
+        store.delete(id);
+      }
+
+      localStorage.setItem(CLEANUP_KEY, 'true');
+    } catch (e) {
+      console.warn('Error purging hardcoded seeds:', e);
+    }
+  }
+
   async getAll(): Promise<Recipe[]> {
     try {
+      await this.cleanupHardcodedSeeds();
+
       const db = await this.getDB();
       return await new Promise<Recipe[]>((resolve, reject) => {
         const tx = db.transaction(STORE_NAME, 'readonly');
@@ -215,12 +113,8 @@ class IndexedDBRecipeDAO implements RecipeDAO {
         const req = store.getAll();
 
         req.onsuccess = () => {
-          let recipes = req.result as Recipe[];
-          if (!recipes || recipes.length === 0) {
-            // First run: Seed the database
-            this.resetToDefaults().then(resolve).catch(reject);
-            return;
-          }
+          let recipes = (req.result as Recipe[]) || [];
+          recipes = recipes.filter((r) => !HARDCODED_SEED_IDS.has(r.id));
           // Sort newest first
           recipes.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
           resolve(recipes);
@@ -230,11 +124,7 @@ class IndexedDBRecipeDAO implements RecipeDAO {
       });
     } catch (err) {
       console.warn('IndexedDB failed, using LocalStorage fallback:', err);
-      let local = this.getLocalBackup();
-      if (local.length === 0) {
-        local = SEED_RECIPES;
-        this.saveLocalBackup(local);
-      }
+      const local = this.getLocalBackup().filter((r) => !HARDCODED_SEED_IDS.has(r.id));
       return local;
     }
   }
@@ -382,15 +272,12 @@ class IndexedDBRecipeDAO implements RecipeDAO {
       const tx = db.transaction(STORE_NAME, 'readwrite');
       const store = tx.objectStore(STORE_NAME);
       store.clear();
-      for (const r of SEED_RECIPES) {
-        store.put(r);
-      }
     } catch (e) {
-      console.warn('Error clearing and resetting IndexedDB:', e);
+      console.warn('Error clearing IndexedDB:', e);
     }
 
-    this.saveLocalBackup(SEED_RECIPES);
-    return SEED_RECIPES;
+    this.saveLocalBackup([]);
+    return [];
   }
 
   async isPersistent(): Promise<boolean> {

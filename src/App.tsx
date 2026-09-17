@@ -310,18 +310,20 @@ export const App: React.FC = () => {
             ))}
           </div>
         ) : (
-          <Card className="rounded-3xl border border-border p-10 text-center max-w-md mx-auto my-8 shadow-xs">
+          <Card className="rounded-3xl border border-border p-8 sm:p-12 text-center max-w-lg mx-auto my-8 shadow-xs">
             <div className="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4">
               <BookOpen className="size-8" />
             </div>
-            <h3 className="text-lg font-bold text-foreground mb-1">
-              לא נמצאו מתכונים תואמים
+            <h3 className="text-lg sm:text-xl font-bold text-foreground mb-1.5">
+              {recipes.length === 0 ? 'ספר המתכונים ריק כרגע' : 'לא נמצאו מתכונים תואמים'}
             </h3>
-            <p className="text-xs text-muted-foreground mb-6 leading-relaxed">
-              נסה לחפש במילים אחרות, לבטל את הסינונים, או להוסיף מתכון חדש לספר שלך.
+            <p className="text-xs sm:text-sm text-muted-foreground mb-6 leading-relaxed max-w-sm mx-auto">
+              {recipes.length === 0
+                ? 'התחל ליצור את ספר המתכונים המשפחתי שלך – הוסף מתכון חדש או ייבא בלחיצה מאינסטגרם!'
+                : 'נסה לחפש במילים אחרות, לבטל את הסינונים, או להוסיף מתכון חדש לספר שלך.'}
             </p>
-            <div className="flex justify-center gap-2">
-              {(searchQuery || selectedCategory !== 'הכל' || showOnlyFavorites || showOnlyInstagram) && (
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              {recipes.length > 0 && (searchQuery || selectedCategory !== 'הכל' || showOnlyFavorites || showOnlyInstagram) && (
                 <Button
                   variant="outline"
                   size="sm"
@@ -331,7 +333,7 @@ export const App: React.FC = () => {
                     setShowOnlyFavorites(false);
                     setShowOnlyInstagram(false);
                   }}
-                  className="rounded-xl text-xs font-semibold"
+                  className="rounded-xl text-xs font-semibold h-9 px-4"
                 >
                   נקה סינונים
                 </Button>
@@ -339,11 +341,25 @@ export const App: React.FC = () => {
               <Button
                 size="sm"
                 onClick={() => setIsNewRecipeModalOpen(true)}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl text-xs font-bold"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl text-xs font-bold h-9 px-4 shadow-sm"
               >
                 <Plus data-icon="inline-start" className="size-4" />
-                הוסף מתכון חדש
+                {recipes.length === 0 ? 'הוסף מתכון ראשון' : 'הוסף מתכון חדש'}
               </Button>
+              {recipes.length === 0 && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setInstagramInitialUrl('');
+                    setIsInstagramSplitOpen(true);
+                  }}
+                  className="rounded-xl text-xs font-bold h-9 px-4 border-rose-200 bg-rose-50/50 hover:bg-rose-100 text-rose-700 shadow-2xs"
+                >
+                  <InstagramIcon data-icon="inline-start" className="text-rose-600 size-4" />
+                  ייבוא מאינסטגרם
+                </Button>
+              )}
             </div>
           </Card>
         )}

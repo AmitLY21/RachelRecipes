@@ -120,7 +120,7 @@ export const DataManagementModal: React.FC<DataManagementModalProps> = ({
   const handleConfirmReset = async () => {
     await RecipeStorage.resetToDefaults();
     onRefreshRecipes();
-    toast.success('מתכוני הדוגמה שוחזרו בהצלחה!');
+    toast.success('ספר המתכונים אופס ורוקן בהצלחה!');
     setResetDialogOpen(false);
     onClose();
   };
@@ -278,7 +278,7 @@ export const DataManagementModal: React.FC<DataManagementModalProps> = ({
               )}
             </div>
 
-            {/* Reset to defaults */}
+            {/* Reset / clear database */}
             <div className="pt-2 border-t border-border flex items-center justify-between">
               <span className="text-xs text-muted-foreground">רוצה להתחיל מחדש?</span>
               <Button
@@ -288,7 +288,7 @@ export const DataManagementModal: React.FC<DataManagementModalProps> = ({
                 className="text-xs text-muted-foreground hover:text-destructive font-semibold h-8"
               >
                 <RotateCcw data-icon="inline-start" className="size-3.5" />
-                שחזר מתכוני דוגמה מקוריים
+                איפוס וריקון ספר המתכונים
               </Button>
             </div>
           </div>
@@ -299,9 +299,9 @@ export const DataManagementModal: React.FC<DataManagementModalProps> = ({
       <AlertDialog open={resetDialogOpen} onOpenChange={setResetDialogOpen}>
         <AlertDialogContent className="rounded-2xl max-w-sm sm:max-w-md">
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-right">שחזור מתכוני דוגמה</AlertDialogTitle>
+            <AlertDialogTitle className="text-right">איפוס וריקון ספר המתכונים</AlertDialogTitle>
             <AlertDialogDescription className="text-right">
-              האם לשחזר את מתכוני הבסיס של רחל? פעולה זו תחליף את כל המתכונים הקיימים במתכוני הדוגמה המקוריים.
+              האם לרוקן את ספר המתכונים? פעולה זו תמחק את כל המתכונים השמורים במכשיר ותאפשר להתחיל מחדש.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="flex-row-reverse sm:justify-start gap-2">
@@ -310,7 +310,7 @@ export const DataManagementModal: React.FC<DataManagementModalProps> = ({
               onClick={handleConfirmReset}
               className="bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-xl"
             >
-              שחזר עכשיו
+              אפס ורוקן עכשיו
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
